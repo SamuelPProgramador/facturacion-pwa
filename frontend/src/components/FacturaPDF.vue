@@ -6,7 +6,8 @@ defineProps({
     carrito: Array,
     total: Number,
     numero: String,
-    fecha: String
+    fecha: String,
+    tipo: String
 })
 
 

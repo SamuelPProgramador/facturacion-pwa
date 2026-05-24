@@ -165,28 +165,27 @@ const finalizarVenta = async () => {
             Facturación
         </h1>
 
-                <select
-            v-model="tipoDocumento"
-            class="border p-3 rounded-xl"
-        >
 
-            <option value="FACTURA">
-                Factura
-            </option>
+        <div class="text-3xl font-bold mb-6">
+            <select
+    v-model="tipoDocumento"
+    class="border p-3 rounded-xl"
+>
 
-            <option value="COTIZACION">
-                Cotización
-            </option>
+    <option value="FACTURA">
+        Factura
+    </option>
 
-        </select>
+    <option value="COTIZACION">
+        Cotización
+    </option>
 
+</select>
+
+        </div>
         
         <!-- CLIENTE -->
-        <p>
-    Tipo:
-    {{ factura.tipo }}
-</p>
-
+      
         <div class="bg-white p-5 rounded shadow mb-6">
 
             <label class="block mb-2 font-semibold">
