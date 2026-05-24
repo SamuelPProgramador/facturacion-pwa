@@ -147,7 +147,7 @@ const confirmarEliminar = (id) => {
         <!-- FORM -->
         <div class="bg-white p-5 rounded shadow mb-6">
 
-            <div class="grid grid-cols-4 gap-4">
+            <div class="grid grid grid-cols-1 md:grid-cols-2 xl:grid-cols-1 md:grid-cols-2 xl:grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-4">
 
                 <input v-model="nombre" type="text" placeholder="Producto" class="border p-3 rounded" />
 

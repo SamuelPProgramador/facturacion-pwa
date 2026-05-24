@@ -2,7 +2,7 @@
 import jsPDF from 'jspdf'
 import html2canvas from 'html2canvas'
 
-import { ref } from 'vue'
+import { ref, computed } from 'vue'
 
 import FacturaPDF from '@/components/FacturaPDF.vue'
 import { useFacturasStore } from '@/stores/facturasStore'
@@ -251,19 +251,21 @@ const facturasFiltradas = computed(() => {
             </button>
         </div>
 
+        <div class="fixed top-0 left-[-9999px]">
 
-    </div>
-    <div class="fixed top-0 left-[-9999px]">
-
-    <FacturaPDF
-        v-if="facturaSeleccionada"
-        :cliente="facturaSeleccionada.cliente"
-        :carrito="facturaSeleccionada.productos"
-        :total="facturaSeleccionada.total"
-        :numero="facturaSeleccionada.numero"
-        :fecha="facturaSeleccionada.fecha"
+        <FacturaPDF
+            v-if="facturaSeleccionada"
+            :cliente="facturaSeleccionada.cliente"
+            :carrito="facturaSeleccionada.productos"
+            :total="facturaSeleccionada.total"
+            :numero="facturaSeleccionada.numero"
+            :fecha="facturaSeleccionada.fecha"
     />
 
 </div>
+
+    </div>
+
+
 
 </template>

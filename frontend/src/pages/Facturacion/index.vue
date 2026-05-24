@@ -17,6 +17,7 @@ const facturasStore = useFacturasStore()
 const clienteSeleccionado = ref('')
 const metodoPago = ref('Efectivo')
 const buscarProducto = ref('')
+const tipoDocumento = ref('FACTURA')
 
 const obtenerCliente = () => {
 
@@ -99,16 +100,26 @@ const finalizarVenta = async () => {
     // DESCONTAR INVENTARIO
     facturacionStore.carrito.forEach(item => {
 
-        productosStore.descontarStock(
-            item.id,
-            item.cantidad
+        if (tipoDocumento.value == 'FACTURA') {
+                productosStore.descontarStock(
+                item.id,
+                item.cantidad
         )
 
+        }
+ 
     })
 
     // NUMERO FACTURA
-    const numeroFactura =
-        facturasStore.obtenerSiguienteNumero()
+        const prefijo =
+        tipoDocumento.value === 'FACTURA'
+            ? 'FAC'
+            : 'COT'
+
+    const numero =
+        `${prefijo}-${String(Date.now()).slice(-6)}`
+    //const numeroFactura =
+      //  facturasStore.obtenerSiguienteNumero()
     // CREAR FACTURA
     const factura = {
 
@@ -123,6 +134,8 @@ const finalizarVenta = async () => {
         total: facturacionStore.total,
 
         metodoPago: metodoPago.value,
+
+        tipo: tipoDocumento.value,
 
     }
 
@@ -152,7 +165,28 @@ const finalizarVenta = async () => {
             Facturación
         </h1>
 
+                <select
+            v-model="tipoDocumento"
+            class="border p-3 rounded-xl"
+        >
+
+            <option value="FACTURA">
+                Factura
+            </option>
+
+            <option value="COTIZACION">
+                Cotización
+            </option>
+
+        </select>
+
+        
         <!-- CLIENTE -->
+        <p>
+    Tipo:
+    {{ factura.tipo }}
+</p>
+
         <div class="bg-white p-5 rounded shadow mb-6">
 
             <label class="block mb-2 font-semibold">
@@ -354,13 +388,14 @@ const finalizarVenta = async () => {
 
         </div>
 
-    </div>
-    <div class="fixed top-0 left-[-9999px]">
+            <div class="fixed top-0 left-[-9999px]">
 
         <FacturaPDF :cliente="obtenerCliente()" :carrito="facturacionStore.carrito" :total="facturacionStore.total"
             :numero="facturasStore.obtenerSiguienteNumero()" :fecha="new Date().toLocaleString()" />
 
     </div>
+    </div>
+
 
 
 </template>

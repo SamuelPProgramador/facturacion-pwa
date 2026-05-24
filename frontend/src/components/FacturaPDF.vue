@@ -22,7 +22,7 @@ const empresaStore = useEmpresaStore()
             <div>
 
                 <h1 class="text-4xl font-bold">
-                    FACTURA
+                    {{ tipo }}
                 </h1>
                 <p class="mt-2 font-bold">
                     {{ numero }}
@@ -151,12 +151,13 @@ const empresaStore = useEmpresaStore()
 
         </div>
 
-    </div>
-    <div class="mt-10 text-center">
+        <div class="mt-10 text-center">
 
     <p>
         {{ empresaStore.empresa.mensaje }}
     </p>
+    </div>
+    
 
 </div>
 
